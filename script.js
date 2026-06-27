@@ -111,69 +111,53 @@ function uploadRecord(){
 
     };
 
-    reader.onload = async function() {
-
+reader.onload = async function () {
 
     record.content = reader.result;
 
-
     if (file.type.startsWith("text")) {
-    try {
-        record.summary = await analyzeWithAI(record.content);
-    } catch (error) {
-        console.error(error);
-        record.summary = "AI analysis failed.";
+        try {
+            record.summary = await analyzeWithAI(record.content);
+        } catch (error) {
+            console.error(error);
+            record.summary = "AI analysis failed.";
+        }
+    } else {
+        record.summary = "AI analysis is currently available only for text documents.";
     }
-} else {
-    record.summary = "AI analysis is currently available only for text documents.";
-}
-
 
     records.unshift(record);
 
-
     saveRecords();
 
+    if (db) {
+        saveRecord(record);
+    }
 
-
-    saveRecord(record);
-
- 
     displayRecords();
 
- 
     document.getElementById("recordTitle").value = "";
-
- 
     document.getElementById("fileInput").value = "";
 
- 
     alert("Record Uploaded Successfully!");
 
-};
+};   // ← Closes reader.onload
 
+// Read the file
 if (file.type.startsWith("text") || file.name.endsWith(".json")) {
     reader.readAsText(file);
 } else {
     reader.readAsDataURL(file);
 }
 
-// ===============================
+}   // ← THIS closes uploadRecord()
 
+// ===============================
 // SAVE
-
 // ===============================
 
-
-
-if (db) {
-    saveRecord(record);
-} else {
-    console.log("Database not ready.");
-}
+function saveRecords() {
     // No longer needed.
-
-
 }
 
 
