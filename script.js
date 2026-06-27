@@ -117,7 +117,16 @@ function uploadRecord(){
     record.content = reader.result;
 
 
-    record.summary = await analyzeWithAI(record.content);
+    if (file.type.startsWith("text")) {
+    try {
+        record.summary = await analyzeWithAI(record.content);
+    } catch (error) {
+        console.error(error);
+        record.summary = "AI analysis failed.";
+    }
+} else {
+    record.summary = "AI analysis is currently available only for text documents.";
+}
 
 
     records.unshift(record);
@@ -143,8 +152,10 @@ function uploadRecord(){
 
 };
 
-reader.readAsText(file);
-
+if (file.type.startsWith("text") || file.name.endsWith(".json")) {
+    reader.readAsText(file);
+} else {
+    reader.readAsDataURL(file);
 }
 
 // ===============================
@@ -155,9 +166,11 @@ reader.readAsText(file);
 
 
 
-function saveRecords(){
-
-
+if (db) {
+    saveRecord(record);
+} else {
+    console.log("Database not ready.");
+}
     // No longer needed.
 
 
