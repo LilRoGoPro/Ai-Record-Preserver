@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Record Preserver</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">AI RECORD PRESERVER</div>
+
+</nav>
+
+
+
+<div class="master-horizontal-slider">
+
+
+
+<section class="hero-panel">
+
+<h1>AI RECORD<br>PRESERVER</h1>
+
+<p>Your intelligent digital memory vault</p>
+
+</section>
+
+
+
+<section class="control-panel">
+
+<h2>Vault Operations</h2>
+
+
+
+<label>Record Title</label>
+
+<input id="recordTitle" type="text" placeholder="Enter title">
+
+
+
+<label>Select File</label>
+
+<input id="fileInput" type="file" accept="*/*">
+
+
+
+<button id="uploadBtn">Upload & Analyze</button>
+
+
+
+<label>Search</label>
+
+<input id="searchInput" type="text" placeholder="Search">
+
+
+
+<button id="searchBtn">Search</button>
+
+</section>
+
+
+
+<section class="records-panel">
+
+<h2>Stored Records</h2>
+						
+<div id="recordList"></div>
+
+</section>
+
+
+
+<section class="assistant-panel">
+
+<h2>AI Assistant</h2>
+
+<div id="chatMessages"></div>
+
+<div class="chatRow">
+
+<input id="chatInput" type="text" placeholder="Ask about your files">
+
+<button id="sendChat">Send</button>
+
+</div>
+
+</section>
+
+
+
+</div>
+
+<script src="database.js"></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+</body>
+
+</html>
