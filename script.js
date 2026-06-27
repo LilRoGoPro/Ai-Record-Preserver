@@ -483,33 +483,20 @@ function addMessage(sender,text){
 }
 
 async function analyzeWithAI(text) {
-
     const response = await fetch("/api/analyze", {
-
         method: "POST",
-
         headers: {
-
             "Content-Type": "application/json"
-
         },
-
-        body: JSON.stringify({
-
-            text: text
-
-        })
-
+        body: JSON.stringify({ text })
     });
-
-    if (!response.ok) {
-
-        throw new Error("AI request failed");
-
-    }
 
     const data = await response.json();
 
-    return data.summary;
+    if (!response.ok) {
+        alert(JSON.stringify(data));
+        throw new Error(data.error || "Unknown error");
+    }
 
+    return data.summary;
 }
