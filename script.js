@@ -145,6 +145,7 @@ function uploadRecord(){
 
 reader.readAsText(file);
 
+}
 
 // ===============================
 
